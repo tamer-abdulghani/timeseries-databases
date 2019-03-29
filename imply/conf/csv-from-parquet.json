@@ -1,0 +1,104 @@
+{
+  "type": "index",
+  "spec": {
+    "dataSchema": {
+      "dataSource": "aisp1-20190204",
+      "parser": {
+        "type": "string",
+        "parseSpec": {
+          "format": "csv",
+          "columns": [
+            "timestamp",
+            "type_of_mobile",
+            "mmsi",
+            "latitude",
+            "longitude",
+            "navigational_status",
+            "rot",
+            "sog",
+            "cog",
+            "heading",
+            "imo",
+            "callsign",
+            "name",
+            "ship_type",
+            "cargo_type",
+            "width",
+            "length",
+            "type_of_position_fixing_device",
+            "draught",
+            "destination",
+            "eta",
+            "data_source_type",
+            "a",
+            "b",
+            "c",
+            "d",
+            "long_timestamp",
+            "sequence_id",
+            "partition"
+          ],
+          "timestampSpec": {
+            "column": "timestamp",
+            "format": "dd/MM/yyyy HH:mm:ss"
+          },
+          "dimensionsSpec": {
+            "dimensions": [
+              "timestamp",
+              "type_of_mobile",
+              "mmsi",
+              "latitude",
+              "longitude",
+              "navigational_status",
+              "rot",
+              "sog",
+              "cog",
+              "heading",
+              "imo",
+              "callsign",
+              "name",
+              "ship_type",
+              "cargo_type",
+              "width",
+              "length",
+              "type_of_position_fixing_device",
+              "draught",
+              "destination",
+              "eta",
+              "data_source_type",
+              "a",
+              "b",
+              "c",
+              "d",
+              "long_timestamp",
+              "sequence_id",
+              "partition"
+            ]
+          }
+        }
+      },
+      "metricsSpec": [
+
+      ],
+      "granularitySpec": {
+        "type": "uniform",
+        "segmentGranularity": "DAY",
+        "queryGranularity": "NONE",
+        "rollup": false
+      }
+    },
+    "ioConfig": {
+      "type": "index",
+      "firehose": {
+        "type": "local",
+        "baseDir": "/var/lib/imply/resources",
+        "filter": "aisp1-20190204.csv"
+      },
+      "appendToExisting": false
+    },
+    "tuningConfig": {
+      "forceExtendableShardSpecs": true,
+      "type": "index"
+    }
+  }
+}

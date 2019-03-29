@@ -1,0 +1,24 @@
+# Docker compose file to deploy using docker-compose, or docker swarm
+version: '3.5'
+services:
+  my-imply:
+    image: imply/imply:latest
+    hostname: my-imply
+    container_name: my-imply
+    ports:
+      - 8110:8110
+      - 8200:8200
+      - 9095:9095
+      - 9097:9097
+      - 9999:9999
+      - 3000:8082
+      - 3001:8081
+    restart: always
+    volumes:
+      - /tmp/data/imply:/var/lib/imply
+    networks:
+      - my-network
+networks:
+  my-network:
+    name: my-network
+    external: false

@@ -1,0 +1,18 @@
+# Docker compose file to deploy using docker-compose, or docker swarm
+version: '3.5'
+services:
+  my-crate:
+    image: crate/crate:latest
+    hostname: my-crate
+    container_name: my-crate
+    ports:
+      - 4200:4200
+    restart: always
+    volumes:
+      - /tmp/data/crate:/var/lib/crate
+    networks:
+      - my-network
+networks:
+  my-network:
+    name: my-network
+    external: false

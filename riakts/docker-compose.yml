@@ -1,0 +1,21 @@
+# Docker compose file to deploy using docker-compose, or docker swarm
+version: '3.5'
+services:
+  my-riak-ts:
+    image: basho/riak-ts:latest
+    hostname: my-riak-ts
+    container_name: my-riak-ts
+    ports:
+      - 8087:8087
+      - 8098:8098
+    environment:
+      - CLUSTER_NAME=riakts
+    restart: always
+    volumes:
+      - /tmp/data/riak-ts:/var/lib/riak-ts
+    networks:
+      - my-network
+networks:
+  my-network:
+    name: my-network
+    external: false

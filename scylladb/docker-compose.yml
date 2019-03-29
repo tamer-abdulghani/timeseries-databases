@@ -1,0 +1,19 @@
+version: '3.5'
+services:
+  my-scylla:
+    image: scylladb/scylla:latest
+    hostname: my-scylladb
+    container_name: my-scylladb
+    ports:
+      - 9042:9042
+    environment:
+      - DC1=DC1
+      - CQLSH_HOST=my-scylladb
+    volumes:
+      - /tmp/data/scylladb/data:/var/lib/scylladb
+    networks:
+      - my-network
+networks:
+  my-network:
+    name: my-network
+    external: false

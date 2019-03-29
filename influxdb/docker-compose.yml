@@ -1,0 +1,48 @@
+# Docker compose file to deploy using docker-compose, or docker swarm
+version: '3.5'
+services:
+  my-influxdb:
+    image: influxdb:latest
+    hostname: my-influxdb
+    container_name: my-influxdb
+    ports:
+      - 8083:8083
+      - 8086:8086
+      - 8090:8090
+    environment:
+      - INFLUXDB_DATA_ENGINE=tsm1
+      - INFLUXDB_REPORTING_DISABLED=false
+    volumes:
+      # Data persistency
+      # sudo mkdir -p /srv/docker/influxdb/data
+      - /tmp/data/influxdb/data:/var/lib/influxdb
+    networks:
+      - my-network
+  my-chronograf:
+    image: chronograf:latest
+    hostname: my-chronograf
+    container_name: my-chronograf
+    ports:
+      - 8888:8888
+    links:
+      - my-influxdb
+    volumes:
+      - /tmp/data/chronograf/data:/var/lib/chronograf
+    networks:
+      - my-network
+  my-telegraf:
+    image: telegraf:latest
+    hostname: my-telegraf
+    container_name: my-telegraf
+    environment:
+      HOSTNAME: "telegraf-getting-started"
+    links:
+      - my-influxdb
+    volumes:
+      - /tmp/data/telegraf/data:/var/lib/telegraf
+    networks:
+      - my-network
+networks:
+  my-network:
+    name: my-network
+    external: false

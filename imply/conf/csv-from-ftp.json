@@ -1,0 +1,94 @@
+{
+  "type": "index",
+  "spec": {
+    "dataSchema": {
+      "dataSource": "aisdk_20190317",
+      "parser": {
+        "type": "string",
+        "parseSpec": {
+          "format": "csv",
+          "columns": [
+            "# Timestamp",
+            "Type of mobile",
+            "MMSI",
+            "Latitude",
+            "Longitude",
+            "Navigational status",
+            "ROT",
+            "SOG",
+            "COG",
+            "Heading",
+            "IMO",
+            "Callsign",
+            "Name",
+            "Ship type",
+            "Cargo type",
+            "Width",
+            "Length",
+            "Type of position fixing device",
+            "Draught",
+            "Destination",
+            "ETA",
+            "Data source type",
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "timestampSpec": {
+            "column": "# Timestamp",
+            "format": "dd/MM/yyyy HH:mm:ss"
+          },
+          "dimensionsSpec": {
+            "dimensions": [
+              "# Timestamp",
+              "MMSI",
+              "Latitude",
+              "Longitude",
+              "Callsign",
+              "Name",
+              "Ship type",
+              "Cargo type",
+              "Width",
+              "Length",
+              "Type of position fixing device",
+              "Draught",
+              "Destination",
+              "ETA",
+              "Data source type",
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          }
+        }
+      },
+      "metricsSpec": [
+        {
+          "type": "count",
+          "name": "count"
+        }
+      ],
+      "granularitySpec": {
+        "type": "uniform",
+        "segmentGranularity": "DAY",
+        "queryGranularity": "NONE",
+        "rollup": false
+      }
+    },
+    "ioConfig": {
+      "type": "index",
+      "firehose": {
+        "type": "local",
+        "baseDir": "/var/lib/imply/resources",
+        "filter": "aisdk_20190317.csv"
+      },
+      "appendToExisting": false
+    },
+    "tuningConfig": {
+      "forceExtendableShardSpecs": true,
+      "type": "index"
+    }
+  }
+}
